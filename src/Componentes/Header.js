@@ -1,19 +1,22 @@
 import React from 'react';
-import Logo from '../Images/Logo.svg';
+import { MdStairs as LogoIcon } from 'react-icons/md';
+import { FaUserAlt as UserIcon } from 'react-icons/fa';
+import { GiHamburgerMenu as HamburguerIcon } from 'react-icons/gi';
 import '../StyleSheets/Header.css';
 
-const Header = () => {
+const Header = ({click}) => {
+
   return (
-    <div>
-        <div>
-          Header
-          <img 
-            src={Logo} 
-            className='logo-img' 
-            alt='Logo'>
-          </img>
+    <>
+      <nav className='header-bg'>
+        <HamburguerIcon className='icon hamb-icon' onClick={click}/>
+        <div className='logo-bg'>
+          <LogoIcon className='logo'/>
+          <a href='/'>Goals</a>
         </div>
-    </div>
+        <UserIcon className='icon' />
+      </nav>
+    </>
   )
 }
 

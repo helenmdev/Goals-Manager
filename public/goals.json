@@ -1,0 +1,10 @@
+{
+    "id":1,
+    "detail": "nuevacreada",
+    "events": 1,
+    "period": "Day",
+    "goal": 10,
+    "duedate": "2024-01-01",
+    "complete": 5,
+    "icon":"Other_Icon"
+  }
