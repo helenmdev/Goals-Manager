@@ -10,7 +10,17 @@ import ModalComplete from "./ModalComplete";
 import Check from "../../Images/check.png";
 import { updateGoal } from "../../Services/Requests";
 
-const Goal = ({ id, details, frequency, events, icon, goal, complete }) => {
+interface GoalProps {
+  id: Number;
+  details: String;
+  frequency: String;
+  events: Number;
+  icon: String;
+  goal: Number;
+  complete: Number;
+}
+
+const Goal = ({ id, details, frequency, events, icon, goal, complete }: GoalProps) => {
   const navegate = useNavigate();
 
   const [completemodal, setCompleteModal] = useState(false);

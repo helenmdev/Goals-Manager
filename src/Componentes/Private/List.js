@@ -1,5 +1,6 @@
-import Goal  from "./Goal";
-import { useContext, useEffect } from "react";
+import React from "react";
+import Goal from "./Goal.tsx";
+import { useContext } from "react";
 import { Context } from "../../Services/Memory";
 import { Outlet } from "react-router-dom";
 

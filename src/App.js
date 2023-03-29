@@ -8,7 +8,7 @@ import Details from "./Componentes/Private/Details";
 import NotFound from "./Componentes/Shared/NotFound";
 import Modal from "./Componentes/Private/Modal";
 import { Context } from "./Services/Memory";
-import { requestGoals, updateGoal } from "./Services/Requests";
+import { requestGoals } from "./Services/Requests";
 import Login from "./Componentes/Public/Login";
 import Singup from "./Componentes/Public/Singup";
 import Auth from "./Componentes/Public/Auth";

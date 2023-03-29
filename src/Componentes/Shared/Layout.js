@@ -1,5 +1,5 @@
-import { Outlet } from "react-router";
 import React from "react";
+import { Outlet } from "react-router";
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
