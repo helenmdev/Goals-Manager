@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import '../StyleSheets/Main.css';
+import '../../StyleSheets/Main.css';
 import {HiOutlineClipboardList as ListIcon} from 'react-icons/hi';
 import {IoMdAddCircleOutline as AddIcon} from 'react-icons/io';
 

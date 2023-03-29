@@ -1,14 +1,14 @@
 import React from "react";
-import "../StyleSheets/Goal.css";
-import icons from "../Objects/Icons";
+import "../../StyleSheets/Goal.css";
+import icons from "../../Objects/Icons";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Context } from "../Services/Memory";
+import { Context } from "../../Services/Memory";
 import Modal from "./Modal";
 import ModalComplete from "./ModalComplete";
 
-import Check from "../Images/check.png";
-import { updateGoal } from "../Services/Requests";
+import Check from "../../Images/check.png";
+import { updateGoal } from "../../Services/Requests";
 
 const Goal = ({ id, details, frequency, events, icon, goal, complete }) => {
   const navegate = useNavigate();

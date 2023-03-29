@@ -3,15 +3,17 @@ import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { setUpNotifications } from "reapop";
 import moment from "moment-timezone";
-import { Context } from "../Services/Memory";
 import { useNotifications } from "reapop";
-import icons from "../Objects/Icons";
+
+import { Context } from "../../Services/Memory";
+import icons from "../../Objects/Icons";
 import Modal from "./Modal";
 import ModalCreate from "./ModalCreate";
-import { createGoal, updateGoal, deleteGoal } from "../Services/Requests";
-import "../StyleSheets/Details.css";
-import "../StyleSheets/Goal.css";
-import { Verify } from '../Services/Verify';
+import { createGoal, updateGoal, deleteGoal } from "../../Services/Requests";
+import { Verify } from "../../Services/Verify";
+
+import "../../StyleSheets/Details.css";
+import "../../StyleSheets/Goal.css";
 
 const Details = ({ fetchData }) => {
 

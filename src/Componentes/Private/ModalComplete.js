@@ -1,5 +1,5 @@
 import React from "react";
-import "../StyleSheets/Modal.css";
+import "../../StyleSheets/Modal.css";
 
 const ModalComplete = ({ ok }) => {
   return (

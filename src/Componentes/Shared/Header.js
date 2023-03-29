@@ -2,7 +2,7 @@ import React from 'react';
 import { MdStairs as LogoIcon } from 'react-icons/md';
 import { FaUserAlt as UserIcon } from 'react-icons/fa';
 import { GiHamburgerMenu as HamburguerIcon } from 'react-icons/gi';
-import '../StyleSheets/Header.css';
+import '../../StyleSheets/Header.css';
 
 const Header = ({click}) => {
 

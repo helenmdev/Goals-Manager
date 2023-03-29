@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import { useState } from "react";
-import "../App.css";
+import "../../App.css";
 
 const Layout = () => {
   const [menuVisible, setMenuVisible] = useState(false);

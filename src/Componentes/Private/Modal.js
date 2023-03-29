@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "../StyleSheets/Modal.css";
+import "../../StyleSheets/Modal.css";
 
 const Modal = ({ showModal, children }) => {
   return (

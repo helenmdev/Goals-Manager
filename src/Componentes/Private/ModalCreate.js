@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import "../StyleSheets/Modal.css";
+import "../../StyleSheets/Modal.css";
 
 const ModalCreate = ({ yesbtn, confirmdelete, nodelete }) => {
   const { id } = useParams();
