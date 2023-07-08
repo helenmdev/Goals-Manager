@@ -1,33 +1,38 @@
-import { useContext, useEffect, useCallback } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import NotificationsSystem, { atalhoTheme, useNotifications } from "reapop";
-
-import Layout from './Componentes/Shared/Layout';
+import Layout from "./Componentes/Shared/Layout";
 import List from "./Componentes/Private/List";
-import Details from "./Componentes/Private/Details";
+import Details from "./Componentes/Private/Details.tsx";
 import NotFound from "./Componentes/Shared/NotFound";
-import Modal from "./Componentes/Private/Modal";
-import { Context } from "./Services/Memory";
-import { requestGoals } from "./Services/Requests";
+import Modal from "./Componentes/Private/Modal.tsx";
 import Login from "./Componentes/Public/Login";
-import Singup from "./Componentes/Public/Singup";
-import Auth from "./Componentes/Public/Auth";
+import Signup from "./Componentes/Public/Signup";
+import ForgotPasswordReq from "./Componentes/Public/ForgotPasswordReq";
+import ResetPassword from "./Componentes/Private/ResetPassword";
+import Settings from "./Componentes/Private/Settings";
+import Statistics from "./Componentes/Private/Statistics";
+import { setUpNotifications } from "reapop";
 
 function App() {
   const { notifications, dismissNotification } = useNotifications();
-  const [, dispatch] = useContext(Context);
+  const navigate = useNavigate();
 
-  const fetch = useCallback(
-    async function fetchData() {
-      const goals = await requestGoals();
-      dispatch({ type: "put", goals: goals });
+  const cleanModal = () => {
+    navigate("/settings/:accountId");
+  };
+
+  setUpNotifications({
+    defaultProps: {
+      position: "top-right",
+      dismissible: true,
+      dismissAfter: 5000,
     },
-    [dispatch]
-  );
+  });
 
-  useEffect(() => {
-    fetch();
-  }, [fetch, dispatch]);
+  const closeModal = () => {
+    navigate("/list");
+  };
 
   return (
     <>
@@ -46,23 +51,40 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/singup" element={<Singup />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
           <Route path="*" element={<NotFound />}></Route>
+          <Route path="/forgotpassword" element={<ForgotPasswordReq />}></Route>
+          <Route
+            path="/resetpassword/:token"
+            element={<ResetPassword />}
+          ></Route>
         </Route>
 
-        <Route element={<Layout private />}>
-          <Route element={<Auth />}>
-            <Route path="/list" element={<List />}></Route>
+        <Route element={<Layout nonPublic />}>
+          <Route path="/settings/:id" element={<Settings />}>
+            <Route
+              path="/settings/:id/resetpassword"
+              element={
+                <Modal cleanModal={cleanModal}>
+                  <ResetPassword />
+                </Modal>
+              }
+            ></Route>
+          </Route>
+
+          <Route path="/statistics/:id" element={<Statistics />}></Route>
+
+          <Route path="/list" element={<List />}>
             <Route
               path="/list/:id"
               element={
-                <Modal>
+                <Modal cleanModal={closeModal}>
                   <Details />
                 </Modal>
               }
             ></Route>
-             <Route path="/new" element={<Details />}></Route>
           </Route>
+          <Route path="/new" element={<Details />}></Route>
         </Route>
       </Routes>
     </>

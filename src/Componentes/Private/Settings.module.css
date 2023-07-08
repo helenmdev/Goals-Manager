@@ -1,0 +1,194 @@
+.settingsBox {
+  width: 100%;
+}
+
+.settingsTitle {
+  font-size: 18px;
+  width: fit-content;
+  padding: 30px;
+}
+
+.statisticsTitle {
+  width: 100%;
+  font-size: 18px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+}
+
+.accountUsername {
+  font-size: 16px;
+  color: rgb(4, 211, 211);
+  width: fit-content;
+  height: 40px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  width: 95%;
+  padding-left: 30px;
+}
+
+.accountOption {
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: fit-content;
+  font-weight: 600;
+  padding-left: 30px;
+}
+
+.accountOption:hover {
+  color: rgb(4, 211, 211);
+  font-weight: 700;
+}
+
+.graphicTitle {
+  text-align: center;
+  font-size: 12px;
+}
+
+.statisticsBox {
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+}
+
+.graphics {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.graphicGoaltype {
+  align-items: center;
+  height: 50%;
+  padding: 20px;
+}
+
+.graphicCompletegoals {
+  align-items: center;
+  height: 50%;
+  padding: 20px;
+}
+
+.goalType {
+  align-items: center;
+  height: 50%;
+  padding: 20px;
+}
+
+.creationModal {
+  text-align: justify;
+  font-size: 0.7rem;
+  font-weight: 500;
+  min-width: 350px;
+  opacity: 1;
+  transition: all 2s ease-in-out;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  border-radius: 15px;
+  z-index: 3;
+}
+
+.modalBtns {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  border: none;
+}
+
+.modalBtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  background-color: rgb(232, 231, 231);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  font-weight: 700;
+  width: 20%;
+  margin: 10px;
+  padding: 15px 35px;
+  transition: all 0.1s ease-in-out forwards;
+  min-width: 30px;
+  align-content: center;
+  border: none;
+}
+
+.modalBtn:hover {
+  transform: scale(0.99);
+  box-shadow: rgba(0, 0, 0, 0.357) 0px 2px 4px 0px inset;
+}
+
+.modalBtn:active {
+  background-color: white;
+}
+
+.createPopup {
+  padding: 25px;
+  background-color: white;
+  display: flex;
+  font-size: 12px;
+  flex-direction: column;
+  border-radius: 15px;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .createPopup {
+    font-size: 15px;
+  }
+
+  .settingsBox {
+    width: 100%;
+    height: 100%;
+  }
+  .settingsTitle {
+    font-size: 22px;
+  }
+
+  .statisticsTitle {
+    font-size: 22px;
+  }
+
+  .accountUsername {
+    font-size: 20px;
+  }
+
+  .accountOption {
+    font-size: 16px;
+  }
+
+  .graphicGoaltype {
+    padding: 10px;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .graphicCompletegoals {
+    padding: 10px;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .creationModal {
+    width: 100%;
+    height: 100%;
+    left: 60px;
+    background-color: white;
+  }
+}

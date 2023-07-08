@@ -1,0 +1,36 @@
+.footerBg {
+  position: fixed;
+  z-index: 1;
+  grid-area: footer;
+  width: 100%;
+  bottom: 0;
+  background: rgb(25, 162, 173);
+  background: linear-gradient(
+    104deg,
+    rgb(0, 185, 206) 0%,
+    rgb(33, 126, 207) 100%
+  );
+}
+
+.footerText {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 200;
+  justify-content: center;
+  margin: 0px;
+  padding: 3px;
+}
+
+@media only screen and (min-width: 768px) {
+  .footerText {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .footerBg {
+    grid-area: footer;
+  }
+}

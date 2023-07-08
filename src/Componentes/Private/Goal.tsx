@@ -1,31 +1,32 @@
 import React from "react";
-import "../../StyleSheets/Goal.css";
+import Styles from "./Goal.module.css";
 import icons from "../../Objects/Icons";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Context } from "../../Services/Memory";
-import Modal from "./Modal";
-import ModalComplete from "./ModalComplete";
-
+import { ContextGoals } from "../../Services/Memory/Goals";
+import Modal from "./Modal.tsx";
 import Check from "../../Images/check.png";
-import { updateGoal } from "../../Services/Requests";
+import { updateGoal } from "../../Services/GoalsRequests";
+import { GoalType } from "../../Types/GoalType";
+import { userToken, userName, userId } from "../../Services/Memory/userData";
 
-interface GoalProps {
-  id: Number;
-  details: String;
-  frequency: String;
-  events: Number;
-  icon: String;
-  goal: Number;
-  complete: Number;
-}
+interface GoalProps extends GoalType {}
 
-const Goal = ({ id, details, frequency, events, icon, goal, complete }: GoalProps) => {
+const Goal = ({
+  id,
+  details,
+  frequency,
+  events,
+  icon,
+  goal,
+  complete,
+}: GoalProps) => {
   const navegate = useNavigate();
 
   const [completemodal, setCompleteModal] = useState(false);
+  const [state, dispatch] = useContext(ContextGoals);
 
-  const [state, dispatch] = useContext(Context);
+  const token = userToken();
 
   let completecheck = state.objects[id].completecheck;
 
@@ -33,7 +34,7 @@ const Goal = ({ id, details, frequency, events, icon, goal, complete }: GoalProp
     e.stopPropagation();
 
     const updateGoalRequest = async () => {
-      const completeUpdate = await updateGoal(goal);
+      const completeUpdate = await updateGoal(goal, token);
       dispatch({ type: "update", goal: completeUpdate });
     };
 
@@ -65,15 +66,19 @@ const Goal = ({ id, details, frequency, events, icon, goal, complete }: GoalProp
   return (
     <>
       <div
-        className={!completecheck ? "goal-card-done card" : "goal-card card"}
+        className={
+          !completecheck
+            ? `${Styles.goalCardDone} ${Styles.card}`
+            : `${Styles.goalCard} ${Styles.card}`
+        }
         id="goalcard"
         onClick={opengoal}
         style={{ minWidth: 0 }}
       >
-        <div className="goal-description" style={{ minWidth: 0 }}>
-          <div className="goal-icon" style={{ minWidth: 0 }}>
+        <div className={Styles.goalDescription} style={{ minWidth: 0 }}>
+          <div className={Styles.goalIcon} style={{ minWidth: 0 }}>
             <img
-              className="goal-icon-img"
+              className={`${Styles.goalIcon} ${Styles.img}`}
               alt="goal icon"
               src={
                 !completecheck
@@ -84,43 +89,63 @@ const Goal = ({ id, details, frequency, events, icon, goal, complete }: GoalProp
               }
             ></img>
           </div>
-          <div style={{ minWidth: 0 }} className="frequency-box">
-            <p className="goal-frequency" style={{ minWidth: 0 }}>
+          <div style={{ minWidth: 0 }} className={Styles.frequencyBox}>
+            <p className={Styles.goalFrequency} style={{ minWidth: 0 }}>
               {events}
-              <sub className="sub" style={{ minWidth: 0 }}>
+              <sub className={Styles.sub} style={{ minWidth: 0 }}>
                 /{frequency}
               </sub>
             </p>
           </div>
-          <p className="goal-description-detail">{details}</p>
+          <p className={Styles.goalDescriptionDetail}>{details}</p>
         </div>
 
-        <div className="goal-progress">
-          <div className="goal-progress-box">
+        <div className={Styles.goalProgress}>
+          <div className={Styles.goalProgressBox}>
             <p>
               {complete} de {goal}
             </p>
             <div>
-              <div className="goal-bar">
+              <div className={Styles.goalBar}>
                 <div
                   className={
                     !completecheck
-                      ? "goal-progress-bar-done"
-                      : "goal-progress-bar"
+                      ? Styles.goalProgressBarDone
+                      : Styles.goalProgressBar
                   }
                   style={{ width: `${Math.round((complete / goal) * 100)}%` }}
                 ></div>
               </div>
             </div>
           </div>
-          <button className="goal-complete-btn" onClick={completegoal}>
-            Completado
-          </button>
+          {completecheck ? (
+            <button className={Styles.goalCompleteBtn} onClick={completegoal}>
+              Complete
+            </button>
+          ) : (
+            <div className={Styles.sub} onClick={completegoal}>
+              Goal Completed!
+            </div>
+          )}
         </div>
       </div>
+
       {completemodal ? (
-        <Modal>
-          <ModalComplete ok={ok} />
+        <Modal showModal={ok} cleanModal={ok}>
+          <div className={Styles.completePopupCard}>
+            <div className={Styles.goalComplete}>
+              Great! you have completed this goal
+            </div>
+            <small>
+              If you want to keep working on this goal, please update it on the
+              updating box
+            </small>
+            <div className={Styles.modalBtns}>
+              <div className={Styles.modalBtn} onClick={ok}>
+                ok
+              </div>
+            </div>
+          </div>
         </Modal>
       ) : (
         <></>

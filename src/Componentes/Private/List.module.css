@@ -1,0 +1,51 @@
+.goalsList {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.goalsList-visible {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.nogoal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mainNogoalText {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .goalsList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0;
+  }
+}

@@ -4,18 +4,27 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import Memory from "./Services/Memory";
 import { NotificationsProvider } from "reapop";
+import MemoryGoals from "./Services/Memory/Goals";
+import MemoryAuth from "./Services/Memory/Autheentication";
+import AccountContext, { AccountProvider } from "./Services/Memory/Navigation";
+import ShowModalContext from "./Services/Memory/ShowModal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <NotificationsProvider>
-      <Memory>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Memory>
+        <MemoryAuth>
+        <AccountContext>
+          <ShowModalContext>
+            <MemoryGoals>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </MemoryGoals>
+          </ShowModalContext>
+          </AccountContext>
+        </MemoryAuth>
     </NotificationsProvider>
   </React.StrictMode>
 );
