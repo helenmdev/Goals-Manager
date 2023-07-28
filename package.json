@@ -1,6 +1,7 @@
 {
   "name": "goalsmanager",
   "version": "0.1.0",
+  "proxy": "http://helenmadev.tech/goalsmanagerapi",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.5.4",
@@ -68,6 +69,6 @@
     "@types/js-cookie": "^3.0.3",
     "prettier": "^2.8.4",
     "typescript": "^5.1.6"
-  },
-  "proxy": "http://localhost:3000/"
+  }
+  
 }
