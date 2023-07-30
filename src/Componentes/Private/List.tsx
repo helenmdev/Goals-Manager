@@ -13,7 +13,7 @@ interface ListProps {
 }
 
 const List = ({ menuVisible }:ListProps) => {
-  const token = userToken();
+  const token = userToken() ?? '';
   const [state, ] = useContext(ContextGoals);
 
   useGetGoals(token);

@@ -8,7 +8,7 @@ import Modal from "./Modal.tsx";
 import Check from "../../Images/check.png";
 import { updateGoal } from "../../Services/GoalsRequests";
 import { GoalType } from "../../Types/GoalType";
-import { userToken, userName, userId } from "../../Services/Memory/userData";
+import { userToken } from "../../Services/Memory/userData";
 
 interface GoalProps extends GoalType {}
 

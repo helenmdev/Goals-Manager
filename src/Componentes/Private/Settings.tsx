@@ -61,7 +61,7 @@ const Settings = () => {
     return () => {
       setAccount(false);
     };
-  }, []);
+  }, [setAccount]);
 
   return (
     <>

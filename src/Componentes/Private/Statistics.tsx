@@ -28,7 +28,7 @@ const Statistics = () => {
     return () => {
       setAccount(false);
     };
-  }, []);
+  }, [setAccount]);
 
   return (
     <div className={Styles.statisticsBox}>

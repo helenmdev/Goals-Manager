@@ -17,7 +17,7 @@ import Styles from "./Details.module.css";
 import { ContextAuth } from "../../Services/Memory/Autheentication";
 import getData from "../../Services/getData";
 import { ShowModalContext } from "../../Services/Memory/ShowModal";
-import { userToken, userName } from "../../Services/Memory/userData";
+import { userToken } from "../../Services/Memory/userData";
 import useGetGoals from "../../Hooks/useGetGoals";
 
 interface Form {
@@ -31,13 +31,12 @@ interface Form {
   frequency: string;
 }
 
-const Details = ({}) => {
+const Details = () => {
   const [auth, dispatchAuth] = useContext(ContextAuth);
   const [state, dispatch] = useContext(ContextGoals);
-  const { setShowModal, showModal } = useContext(ShowModalContext);
+  const { setShowModal, } = useContext(ShowModalContext);
 
   const token = userToken();
-  const user = userName();
 
   useGetGoals(token);
 

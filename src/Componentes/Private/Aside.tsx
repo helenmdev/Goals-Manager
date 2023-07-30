@@ -34,7 +34,7 @@ const Aside = ({ menuVisible, hideMenu } : AsideProps ) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [hideMenu]);
 
   return (
     <nav className="side-bar-box">

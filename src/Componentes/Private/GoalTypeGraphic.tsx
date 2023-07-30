@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ContextGoals } from "../../Services/Memory/Goals";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, ArcElement } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Styles from "./Settings.module.css";
 
@@ -15,7 +15,7 @@ const GoalVsCompleteGraphic = () => {
 
     if (state.order) {
       state.order.map((id: string) => {
-        goals.push(state.objects[id].goal);
+        return goals.push(state.objects[id].goal);
       });
     }
 
@@ -30,7 +30,7 @@ const GoalVsCompleteGraphic = () => {
 
     if (state.order) {
       state.order.map((id: string) => {
-        completes.push(state.objects[id].complete);
+        return completes.push(state.objects[id].complete);
       });
     }
 
