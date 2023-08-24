@@ -9,7 +9,7 @@ import { userToken, userId } from "../../Services/Memory/userData";
 
 const Statistics = () => {
   const token = userToken();
-  const id = userId();
+  const user_id = userId();
 
   setUpNotifications({
     defaultProps: {
@@ -20,8 +20,8 @@ const Statistics = () => {
   });
 
   const { setAccount } = useContext(AccountContext);
-
-  useGetGoals(token);
+  
+  useGetGoals(token, user_id);
 
   useEffect(() => {
     setAccount(true);
@@ -34,8 +34,8 @@ const Statistics = () => {
     <div className={Styles.statisticsBox}>
       <h1 className={Styles.statisticsTitle}>Statistics</h1>
       <div className={Styles.graphics}>
-        <GoalTypeGraphic className={Styles.canvas} id={id} token={token} />
-        <GoalVsCompleteGraphic className={Styles.canvas} id={id} />
+        <GoalTypeGraphic className={Styles.canvas} id={user_id} token={token} />
+        <GoalVsCompleteGraphic className={Styles.canvas} id={user_id} />
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { ContextAuth } from "../../Services/Memory/Autheentication";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Credentials from "../Shared/Credentials";
 import { signup } from "../../Services/AuthRequests";
@@ -24,13 +23,11 @@ setUpNotifications({
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
-  const [, dispatchAuth] = useContext(ContextAuth);
    const { notify } = useNotifications();
 
   const send = async (form: { email: string; password: string }) => {
     try {
       const token = await signup(form);
-      dispatchAuth({ type: "put", token });
       localStorage.setItem("token", JSON.stringify(token));
       notify(CreatedNotification);
       setTimeout(() => {
@@ -53,7 +50,7 @@ const Signup: React.FC = () => {
       button="Sign Up"
       link="I already have an account"
       redirect={redirect}
-      signup={showSignup}
+
     />
   );
 };

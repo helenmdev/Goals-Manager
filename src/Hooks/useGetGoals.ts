@@ -2,10 +2,9 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { requestGoals } from "../Services/GoalsRequests";
 import { useNotifications } from "reapop";
-import { ContextAuth } from "../Services/Memory/Autheentication";
 import { ContextGoals } from "../Services/Memory/Goals";
 
-const useGetGoals = (token: string): void => {
+const useGetGoals = (token: string, id:number): void => {
   const navigate = useNavigate();
   const { notify } = useNotifications();
   const [, dispatch] = useContext(ContextGoals);
@@ -19,8 +18,8 @@ const useGetGoals = (token: string): void => {
 
     const getGoals = async (): Promise<void> => {
       try {
-        const goals = await requestGoals(token);
-        dispatch({ type: "put", goals });
+        const goals = await requestGoals(token, id);
+        return dispatch({ type: "put", goals });
       } catch (error) {
         if (error.message === "UnauthorizedError") {
           handleUnauthorized();
@@ -31,7 +30,7 @@ const useGetGoals = (token: string): void => {
       }
     };
     getGoals();
-  }, [dispatch, token]);
+  }, [dispatch, id, navigate, notify, token]);
 };
 
 export default useGetGoals;

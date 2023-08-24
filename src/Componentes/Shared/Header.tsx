@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { MdStairs as LogoIcon } from "react-icons/md";
 import { FaUserAlt as UserIcon } from "react-icons/fa";
 import { GiHamburgerMenu as HamburguerIcon } from "react-icons/gi";
@@ -15,22 +15,14 @@ interface HeaderProps {
 }
 
 const Header = ({ showMenu, nonPublic }: HeaderProps) => {
-  const [userMenu, setUserMenu] = useState(false);
   const { setAccount } = useContext(AccountContext);
   const navigate = useNavigate();
   const { notify } = useNotifications();
-
-  const token = "logot";
 
   const logoutFunc = async () => {
     localStorage.removeItem("token");
     navigate("/login");
     notify("Session closed", "success");
-  };
-
-  const headerBurger = useRef();
-  const usermenuFunc = () => {
-    setUserMenu(!userMenu);
   };
 
   const logoClick = () => {
@@ -45,20 +37,18 @@ const Header = ({ showMenu, nonPublic }: HeaderProps) => {
   };
 
   const privateHeader = (
-    <header className={Styles.headerBg} >
+    <header className={Styles.headerBg}>
       <HamburguerIcon
         className={`${Styles.icon} ${Styles.hambIcon}`}
         onClick={showMenu}
-    
-    id='headerBurger'
-       
+        id="headerBurger"
       />
-      <div className={Styles.logoBg} onClick={logoClick} >
+      <div className={Styles.logoBg} onClick={logoClick}>
         <LogoIcon className={Styles.logo} />
         <div>Goals</div>
       </div>
       <nav className={Styles.usermenubox}>
-        <UserIcon className={Styles.dropdownicon} onClick={usermenuFunc} />
+        <UserIcon className={Styles.dropdownicon}  />
         <div className={Styles.dropdowncontent}>
           <div className={Styles.dropdownitem} onClick={settings}>
             Settings

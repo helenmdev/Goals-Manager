@@ -1,37 +1,31 @@
 import { CredentialsTypes } from "../Types/CredentialsTypes";
 import Cookies from "js-cookie";
+import API from "./api"; 
 
 interface Token {
   token: string;
 }
 
+
 export async function signup(credentials: CredentialsTypes) {
-  const response = await fetch(`/api/signup`, {
-    method: "POST",
-    body: JSON.stringify(credentials),
-    headers: {
-      "content-type": "application/json; charset=UTF-8",
-    },
-  });
+  try {
+    const response = await API.post("/signup", credentials);
 
-  if (response.status !== 200) throw new Error();
-  const token: Token = await response.json();
-  Cookies.set("token", JSON.stringify(token), {
-    secure: true,
-  });
+    if (response.status !== 200) throw new Error();
+    const token: Token = response.data;
+    Cookies.set("token", JSON.stringify(token), {
+      secure: true,
+    });
 
-  return token;
+    return token;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function login(credentials: CredentialsTypes) {
   try {
-    const response = await fetch(`/api/login`, {
-      method: "POST",
-      body: JSON.stringify(credentials),
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-      },
-    });
+    const response = await API.post("/login", credentials); // Use API.post() instead of axios.post()
 
     if (response.status === 404) {
       throw new Error("Account not found");
@@ -41,7 +35,10 @@ export async function login(credentials: CredentialsTypes) {
       throw new Error("Unknown error");
     }
 
-    const token: Token = await response.json();
+    const token: Token = response.data;
+    Cookies.set("token", JSON.stringify(token), {
+      secure: true,
+    });
 
     return token;
   } catch (error) {
@@ -50,21 +47,40 @@ export async function login(credentials: CredentialsTypes) {
 }
 
 export async function logout() {
-  const response = await fetch(`/api/logout`, {
-    method: "POST",
-  });
-  if (response.status !== 200) throw new Error();
-  const token: Token = await response.json();
+  try {
+    const response = await API.post("/logout"); 
+    if (response.status !== 200) throw new Error();
+    const token: Token = response.data;
 
-  return token;
+    return token;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export const deleteAccount = async (id: number, token: any): Promise<void> => {
-  await fetch(`/api/delete_account/${id}`, {
-    method: "DELETE",
-    headers: {
-      "content-type": "application/json; charset=UTF-8",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  try {
+    await API.delete(`/delete_account/${id}`, {
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+      },
+    }); // Use API.delete() instead of axios.delete()
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resetPassword = async (token: string, newpass: any): Promise<void> => {
+  try {
+    await API.post("/reset_password", {
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+        'newpassword':newpass,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
 };

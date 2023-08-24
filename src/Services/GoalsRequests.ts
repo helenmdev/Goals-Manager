@@ -1,87 +1,60 @@
 import { GoalType } from "../Types/GoalType";
+import API from "./api";
 
-export const requestGoals = async (token: any): Promise<GoalType[]> => {
+const axiosConfig = (token: string, userid: number) => ({
+  headers: {
+    "content-type": "application/json; charset=UTF-8",
+    Authorization: `Bearer ${token}`,
+    'user-id': userid,
+  },
+});
+
+
+const handleUnauthorizedError = () => {
+  throw new Error("UnauthorizedError");
+};
+
+export const requestGoals = async (token: string, userid: number): Promise<GoalType[]> => {
+
   try {
-    const response = await fetch("/api/goals", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (response.status === 401) {
-      throw new Error("UnauthorizedError");
-    }
-    const goals = await response.json();
-    return goals;
+    const response = await API.get("/goals", axiosConfig(token, userid));
+    return response.data;
   } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error("Network error occurred. Check your internet connection.");
+    }
     throw error;
   }
 };
 
-export const createGoal = async (
-  goal: GoalType,
-  token: string
-): Promise<GoalType> => {
+export const createGoal = async (goal: GoalType, token: string, userid:number): Promise<GoalType> => {
   try {
-    const response = await fetch("api/goals", {
-      method: "POST",
-      body: JSON.stringify(goal),
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const createdGoal = await response.json();
-    if (response.status === 401) {
-      throw new Error("UnauthorizedError");
-    }
-    return createdGoal;
+    const response = await API.post("/goals", goal, axiosConfig(token, userid));
+    return response.data;
   } catch (error) {
-    throw new Error("UnauthorizedError");
+    handleUnauthorizedError();
   }
 };
 
-export const updateGoal = async (
-  goal: GoalType,
-  token: any
-): Promise<GoalType> => {
+
+export const updateGoal = async (goal: GoalType, token: string, userid: number): Promise<GoalType> => {
   try {
-    const response = await fetch(`/api/goals/${goal.id}`, {
-      method: "PUT",
-      body: JSON.stringify(goal),
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const updatedGoal = await response.json();
-    if (response.status === 401) {
-      throw new Error("UnauthorizedError");
-    }
+    const response = await API.put(`/goals/${goal.id}`, goal, axiosConfig(token, userid));
+
+    const updatedGoal: GoalType = response.data;
     return updatedGoal;
   } catch (error) {
-    if (error.status === 401) {
-      throw new Error("UnauthorizedError");
-    }
+    console.error("An error occurred while updating the goal:", error);
+    handleUnauthorizedError();
+    throw error;
   }
 };
 
-export const deleteGoal = async (id: number, token: any): Promise<void> => {
+
+export const deleteGoal = async (id: GoalType, token: string,  userid: number): Promise<void> => {
   try {
-    const response = await fetch(`/api/goals/${id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (response.status === 401) {
-      throw new Error("UnauthorizedError");
-    }
+    await API.delete(`/goals/${id}`, axiosConfig(token, userid));
   } catch (error) {
-    if (error.status === 401) {
-      throw new Error("UnauthorizedError");
-    }
+    handleUnauthorizedError();
   }
 };

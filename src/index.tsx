@@ -6,15 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { NotificationsProvider } from "reapop";
 import MemoryGoals from "./Services/Memory/Goals";
-import MemoryAuth from "./Services/Memory/Autheentication";
-import AccountContext, { AccountProvider } from "./Services/Memory/Navigation";
+import AccountContext from "./Services/Memory/Navigation";
 import ShowModalContext from "./Services/Memory/ShowModal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <NotificationsProvider>
-        <MemoryAuth>
         <AccountContext>
           <ShowModalContext>
             <MemoryGoals>
@@ -24,7 +22,6 @@ root.render(
             </MemoryGoals>
           </ShowModalContext>
           </AccountContext>
-        </MemoryAuth>
     </NotificationsProvider>
   </React.StrictMode>
 );

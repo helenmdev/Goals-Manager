@@ -1,20 +1,23 @@
-export const TokenVerify = async (token: string): Promise<Response> => {
-  try {
-    const res: Response = await fetch("/api/verify", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+import API_BASE_URL from "./api";
+import axios from "axios";
 
-    if (!res.ok) {
-      console.log(res.status);
-      throw new Error(`Token verification failed: ${res.status}`);
+const axiosConfig = (token: string) => ({
+  headers: {
+    "content-type": "application/json; charset=UTF-8",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+export const TokenVerify = async (token: string): Promise<unknown> => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/verify`, axiosConfig(token));
+
+    if (!response.status === 200) {
+      throw new Error(`Token verification failed: ${response.status}`);
     }
 
-    return res;
-  } catch (error: unknown) {
+    return response;
+  } catch (error) {
     if (error instanceof Error) {
       throw error;
     }

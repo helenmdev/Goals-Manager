@@ -22,7 +22,7 @@ const ForgotPasswordReq: React.FC = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await axios.post("/api/forgot_password", { email });
+      await axios.post("/forgot_password", { email });
       notify("Password reset email sent", "success");
     } catch (error) {
       notify("Something went wrong, try again", "error");

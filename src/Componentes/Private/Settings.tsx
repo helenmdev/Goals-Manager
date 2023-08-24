@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { ContextAuth } from "../../Services/Memory/Autheentication";
 import Styles from "./Settings.module.css";
 import { Outlet, useNavigate } from "react-router-dom";
 import { deleteAccount } from "../../Services/AuthRequests";
@@ -19,20 +18,19 @@ const deleteNotification = {
 };
 
 const Settings = () => {
-  const [, dispatchAuth] = useContext(ContextAuth);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const navigate = useNavigate();
   const { setAccount } = useContext(AccountContext);
   const token = userToken();
-  const id = userId();
+  const user_id = userId();
   const user = userName();
 
   const { notify } = useNotifications();
 
-  useGetGoals(token);
+  useGetGoals(token, user_id);
 
   const resetPass = () => {
-    navigate(`/settings/${id}/resetpassword`);
+    navigate(`/settings/${user_id}/resetpassword`);
   };
 
   const deleteAccountFunc = async () => {
@@ -40,15 +38,13 @@ const Settings = () => {
   };
 
   const confirmAccountDelete = async () => {
-    await deleteAccount(id, token)
+    await deleteAccount(user_id, token)
       .then(() => {
         navigate("/login");
         notify(deleteNotification);
       })
       .catch((error) => {
-        console.log(error);
       });
-    dispatchAuth({ type: "logout" });
   };
 
   const nodelete = () => {

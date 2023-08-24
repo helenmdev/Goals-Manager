@@ -7,6 +7,8 @@ import { useNotifications } from "reapop";
 import { ContextGoals } from "../../Services/Memory/Goals";
 import icons from "../../Objects/Icons";
 import Modal from "./Modal";
+import { GoalType } from "../../Types/GoalType";
+
 import {
   createGoal,
   updateGoal,
@@ -14,31 +16,20 @@ import {
 } from "../../Services/GoalsRequests";
 import { FormsVerify } from "../../Services/FormsVerify";
 import Styles from "./Details.module.css";
-import { ContextAuth } from "../../Services/Memory/Autheentication";
 import getData from "../../Services/getData";
 import { ShowModalContext } from "../../Services/Memory/ShowModal";
-import { userToken } from "../../Services/Memory/userData";
+import { userId, userToken } from "../../Services/Memory/userData";
 import useGetGoals from "../../Hooks/useGetGoals";
 
-interface Form {
-  details: string;
-  goal: number;
-  duedate: string;
-  complete: number;
-  icon: string;
-  completecheck: boolean;
-  events: number;
-  frequency: string;
-}
-
 const Details = () => {
-  const [auth, dispatchAuth] = useContext(ContextAuth);
   const [state, dispatch] = useContext(ContextGoals);
-  const { setShowModal, } = useContext(ShowModalContext);
+  const { setShowModal } = useContext(ShowModalContext);
 
   const token = userToken();
+  const { id } = useParams();
+  const user_id = userId();
 
-  useGetGoals(token);
+  useGetGoals(token, user_id);
 
   setUpNotifications({
     defaultProps: {
@@ -50,14 +41,12 @@ const Details = () => {
 
   const { notify } = useNotifications();
 
-  const { id } = useParams();
-
   const navigate = useNavigate();
 
   const [showModalConfirm, setShowModalConfirm] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState("Other goal");
 
-  const [form, setForm] = useState<Form>({
+  const [form, setForm] = useState<GoalType>({
     details: "",
     goal: 1,
     duedate: new Date().toISOString(),
@@ -79,7 +68,7 @@ const Details = () => {
       return navigate("/list");
     }
     setForm(memoryid);
-  }, [id, navigate, memoryid, auth]);
+  }, [id, navigate, memoryid]);
 
   const { details, frequency, events, icon, goal, complete } = form;
 
@@ -94,7 +83,7 @@ const Details = () => {
     setForm((state) => ({ ...state, [prop]: event.target.value }));
   };
 
-  const VerifyForms = (form) => {
+  const VerifyForms = () => {
     if (!condition1) {
       notify("Duedate must be in the future", "error");
     }
@@ -123,7 +112,6 @@ const Details = () => {
   };
 
   const handleUnauthorized = () => {
-    dispatchAuth({ type: "logout" });
     localStorage.removeItem("token");
     navigate("/login");
     notify("Unauthorized user, please log in again", "error");
@@ -140,10 +128,11 @@ const Details = () => {
 
   const create = async () => {
     try {
-      VerifyForms(form);
+      VerifyForms();
       if (allconditions) {
         try {
-          const goal = await createGoal(form, token);
+          const goal = await createGoal(form, token, user_id);
+
           dispatch({ type: "create", goal });
           setShowModalConfirm(true);
         } catch (error) {
@@ -167,14 +156,12 @@ const Details = () => {
           form.completecheck = true;
         }
         try {
-          const goalupdated = await updateGoal(form, token);
-          dispatch({ type: "update", goalupdated });
+          const updatedGoal = await updateGoal(form, token, user_id);
+          dispatch({ type: "update", goal: updatedGoal });
           navigate("/list");
-          getData(token, dispatch);
+          getData(token, user_id, dispatch);
         } catch (error) {
-          if (error.message === "UnauthorizedError") {
-            handleUnauthorized();
-          }
+          handleUnauthorized();
         }
       }
     } catch (error) {
@@ -188,11 +175,12 @@ const Details = () => {
 
   const confirmdelete = async () => {
     try {
-      await deleteGoal(form.id, token);
+      await deleteGoal(form.id, token, user_id);
       dispatch({ type: "delete", id: form.id });
       navigate("/list");
-      await getData(token, dispatch);
+      getData(token, user_id, dispatch);
     } catch (error) {
+
       if (error.message === "UnauthorizedError") {
         handleUnauthorized();
       }

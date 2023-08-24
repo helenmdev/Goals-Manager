@@ -4,44 +4,29 @@ import { Chart as ChartJS, ArcElement } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Styles from "./Settings.module.css";
 
-
 const GoalVsCompleteGraphic = () => {
   const [state] = useContext(ContextGoals);
   ChartJS.register(ArcElement);
-  
 
-  const goalsCounter = () => {
-    let goals: number[] = [];
+  let goals: number[] = [];
 
-    if (state.order) {
-      state.order.map((id: string) => {
-        return goals.push(state.objects[id].goal);
-      });
-    }
+  if (state.order) {
+    state.order.map((id: string) => {
+      return goals.push(state.objects[id].completecheck);
+    });
+  }
 
-    const initialValue = 0;
-    return goals.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue;
-    }, initialValue);
-  };
+  function counter(goals, value) {
+    return goals.reduce((count, currentValue) => {
+      if (currentValue === value) {
+        count++;
+      }
+      return count;
+    }, 0);
+  }
 
-  const completeCounter = () => {
-    let completes: number[] = [];
-
-    if (state.order) {
-      state.order.map((id: string) => {
-        return completes.push(state.objects[id].complete);
-      });
-    }
-
-    const initialValue = 0;
-    return completes.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue;
-    }, initialValue);
-  };
-
-  const goalcount = goalsCounter();
-  const goalcomplete = completeCounter();
+  const goalcount = counter(goals, true);
+  const goalcomplete = counter(goals, false);
 
   let dataGoalsComplete: number[] = [];
   dataGoalsComplete.push(goalcount, goalcomplete);

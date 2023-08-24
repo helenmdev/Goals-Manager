@@ -4,8 +4,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "../../App.css";
 import Aside from "../Private/Aside";
-import Login from "../Public/Login";
-import { useNavigate } from "react-router-dom";
 
 interface LayoutProps {
   nonPublic: boolean;
@@ -14,12 +12,12 @@ interface LayoutProps {
 const Layout: LayoutProps = ({ nonPublic }) => {
   const [menuVisible, setMenuVisible] = useState(false);
 
-  const showMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
-const navigate = useNavigate();
   const hideMenu = () => {
     setMenuVisible(false);
+  };
+
+  const showMenu = () => {
+    setMenuVisible(!menuVisible);
   };
 
   return (

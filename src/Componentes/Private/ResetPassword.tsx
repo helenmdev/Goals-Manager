@@ -5,6 +5,7 @@ import styles from "../Shared/Credentials.module.css";
 import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
 import { setUpNotifications } from "reapop";
 import { useNotifications } from "reapop";
+import { userToken } from "../../Services/Memory/userData";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -12,6 +13,7 @@ const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const dataUserToken = userToken();
 
   setUpNotifications({
     defaultProps: {
@@ -36,7 +38,7 @@ const ResetPassword = () => {
     }
 
     try {
-      await axios.post("/api/reset_password", { token, newPassword });
+      await axios.post("/reset_password", { token, newPassword });
       notify("Password reset successfully", "success");
       setTimeout(redirectlogin, 3000);
     } catch (error) {
@@ -57,11 +59,11 @@ const ResetPassword = () => {
     }
     try {
       await axios.post(
-        "/api/resetuserpassword",
+        "/resetuserpassword",
         { newPassword, id },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${dataUserToken}`,
           },
         }
       );

@@ -39,7 +39,7 @@ const Credentials = ({
       const loginCookie = decryptData(encodedCookie);
       const deserializedForm = loginCookie;
       setForm(deserializedForm);
-      if (deserializedForm.remember == true) {
+      if (deserializedForm.remember === true) {
         const rememberCheckbox = document.getElementById("remember-checkbox");
         (rememberCheckbox as HTMLInputElement).checked = true;
       }
@@ -62,7 +62,7 @@ const Credentials = ({
         }
       }
     }
-  }, []);
+  }, [signup]);
 
   const navigate = useNavigate();
 

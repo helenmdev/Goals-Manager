@@ -47,7 +47,7 @@ function App() {
         />
       </div>
       <Routes>
-        <Route path="/" element={<Navigate to="/list" />}></Route>
+        <Route path="/" element={<Navigate to="/login" />}></Route>
 
         <Route element={<Layout />}>
           <Route path="/login" element={<Login />}></Route>

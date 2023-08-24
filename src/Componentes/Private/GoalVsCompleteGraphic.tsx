@@ -26,7 +26,7 @@ const GoalTypeGraphic = () => {
           state.objects[id].icon !==
           "/static/media/target.14e881f54772ce4b0ec7.png"
         ) {
-          elements.push(state.objects[id].icon);
+          return elements.push(state.objects[id].icon);
         }
       });
     }

@@ -1,5 +1,4 @@
-import React, { useContext, FormEvent } from "react";
-import { ContextAuth } from "../../Services/Memory/Autheentication";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Credentials from "../Shared/Credentials";
 import { login } from "../../Services/AuthRequests";
@@ -8,7 +7,6 @@ import { useNotifications } from "reapop";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [auth, dispatchAuth] = useContext(ContextAuth);
 
   setUpNotifications({
     defaultProps: {
@@ -24,21 +22,25 @@ const Login = () => {
   const send = async (form: { username: string; password: string }) => {
     try {
       const token = await login(form);
-      navigate("/list");
-      dispatchAuth({ type: "put", token: token });
-      localStorage.setItem("token", JSON.stringify(token));
+      try {
+        navigate("/list");
+        localStorage.setItem("token", JSON.stringify(token));
+      } catch (err) {
+      }
     } catch (error) {
       if (!form.username || !form.password) {
         notify("Please enter user and password", "error");
       } else {
-        if (error.message === "Invalid password") {
-          notify("Invalid password", "error");
+        if (error.response) {
+          if (error.response.status === 404) {
+            notify("Account not found", 'error');
+          } else if (error.response.status === 401) {
+            notify("Invalid password", 'error');
+          }
         }
-        if (error.message === "Account not found") {
-          notify("Account not found", "error");
-        }
+        throw new Error("An error occurred. Please try again later.");
       }
-    }
+    };
   };
 
   const redirect = () => {
