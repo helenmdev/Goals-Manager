@@ -6,6 +6,7 @@ import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
 import { setUpNotifications } from "reapop";
 import { useNotifications } from "reapop";
 import { userToken } from "../../Services/Memory/userData";
+import { resetPassword, resetUserPassword } from "../../Services/AuthRequests";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -38,7 +39,7 @@ const ResetPassword = () => {
     }
 
     try {
-      await axios.post("/reset_password", { token, newPassword });
+      await resetPassword(token, newPassword);
       notify("Password reset successfully", "success");
       setTimeout(redirectlogin, 3000);
     } catch (error) {
@@ -58,19 +59,13 @@ const ResetPassword = () => {
       return;
     }
     try {
-      await axios.post(
-        "/resetuserpassword",
-        { newPassword, id },
-        {
-          headers: {
-            Authorization: `Bearer ${dataUserToken}`,
-          },
-        }
-      );
+      await resetUserPassword(dataUserToken, newPassword, id);
+    
       notify("Password reset successfully", "success");
       setTimeout(redirectlogin, 1000);
     } catch (error) {
       notify("Something went wrong", "error");
+      console.log(error);
     }
   };
 

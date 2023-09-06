@@ -4,6 +4,7 @@ import styles from "../Shared/Credentials.module.css";
 import { useNavigate } from "react-router-dom";
 import { setUpNotifications } from "reapop";
 import { useNotifications } from "reapop";
+import { forgotPassword } from "../../Services/AuthRequests";
 
 const ForgotPasswordReq: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -22,7 +23,7 @@ const ForgotPasswordReq: React.FC = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await axios.post("/forgot_password", { email });
+      await forgotPassword(email);
       notify("Password reset email sent", "success");
     } catch (error) {
       notify("Something went wrong, try again", "error");

@@ -1,11 +1,12 @@
 import { CredentialsTypes } from "../Types/CredentialsTypes";
 import Cookies from "js-cookie";
-import API from "./api"; 
+import API from "./api";
+import axios from "axios";
+import { userId } from "./Memory/userData";
 
 interface Token {
   token: string;
 }
-
 
 export async function signup(credentials: CredentialsTypes) {
   try {
@@ -25,7 +26,7 @@ export async function signup(credentials: CredentialsTypes) {
 
 export async function login(credentials: CredentialsTypes) {
   try {
-    const response = await API.post("/login", credentials); // Use API.post() instead of axios.post()
+    const response = await API.post("/login", credentials);
 
     if (response.status === 404) {
       throw new Error("Account not found");
@@ -48,7 +49,7 @@ export async function login(credentials: CredentialsTypes) {
 
 export async function logout() {
   try {
-    const response = await API.post("/logout"); 
+    const response = await API.post("/logout");
     if (response.status !== 200) throw new Error();
     const token: Token = response.data;
 
@@ -65,21 +66,59 @@ export const deleteAccount = async (id: number, token: any): Promise<void> => {
         "content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${token}`,
       },
-    }); // Use API.delete() instead of axios.delete()
+    });
   } catch (error) {
     throw error;
   }
 };
 
-export const resetPassword = async (token: string, newpass: any): Promise<void> => {
+export const resetPassword = async (
+  token: string,
+  newpass: any
+): Promise<void> => {
   try {
     await API.post("/reset_password", {
       headers: {
         "content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${token}`,
-        'newpassword':newpass,
+        newpassword: newpass,
       },
     });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const forgotPassword = async (email: any): Promise<void> => {
+  try {
+    await API.post("/forgot_password", {
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        email: email,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resetUserPassword = async (
+  token: any,
+  newpass: any,
+  id: number
+): Promise<void> => {
+  try {
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:3000",
+      timeout: 5000,
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+        newpassword: newpass,
+        user_id: id,
+      },
+    });
+    await axiosInstance.post("/resetuserpassword");
   } catch (error) {
     throw error;
   }
