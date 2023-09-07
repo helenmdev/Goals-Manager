@@ -39,7 +39,7 @@ This project showcases a practical implementation of modern web development tech
 
 ## Built with
 
-**Front End** :
+* **Front End** :
 HTML,
 Typescript,
 CSS modules,
@@ -51,7 +51,7 @@ Reapop,
 React router,
 Math JS.
 
-**Backend End**
+* **Backend End**
 Technologies,
 NodeJS,
 Express,
