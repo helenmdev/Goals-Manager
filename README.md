@@ -39,27 +39,27 @@ This project showcases a practical implementation of modern web development tech
 
 ## Built with
 
-*Front End*
-HTML
-Typescript
-CSS modules
-Axios
-ChartJS
-JS Cookie
-CryptoJS
-Reapop
-React router
-Math JS
+**Front End** :
+HTML,
+Typescript,
+CSS modules,
+Axios,
+ChartJS,
+JS Cookie,
+CryptoJS,
+Reapop,
+React router,
+Math JS.
 
-*Backend End*
-Technologies
-NodeJS
-Express
-JWT
-Bcrypt
-Nodemailer
-Moment
-PostgreSQL
+**Backend End**
+Technologies,
+NodeJS,
+Express,
+JWT,
+Bcrypt,
+Nodemailer,
+Moment,
+PostgreSQL.
 
 ## Getting Started:
 
