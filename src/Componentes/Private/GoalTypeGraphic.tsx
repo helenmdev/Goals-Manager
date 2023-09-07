@@ -32,8 +32,8 @@ const GoalVsCompleteGraphic = () => {
   dataGoalsComplete.push(goalcount, goalcomplete);
 
   const data = {
-    title: "Active Goals vs Complete Goals",
-    labels: ["Active Goals", "Complete Goals"],
+    title: "Active Goals vs Completed Goals",
+    labels: ["Active Goals", "Completed Goals"],
     datasets: [
       {
         label: "# of goals",
@@ -46,7 +46,7 @@ const GoalVsCompleteGraphic = () => {
 
   return (
     <div className={Styles.goalType}>
-      <h1 className={Styles.graphicTitle}>Active Goals vs Complete Goals</h1>
+      <h1 className={Styles.graphicTitle}>Active Goals vs Completed Goals</h1>
       <Doughnut data={data} />
     </div>
   );
