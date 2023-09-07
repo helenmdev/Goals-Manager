@@ -27,15 +27,15 @@ Users have the option to change their passwords and delete their accounts, all m
 
 This project showcases a practical implementation of modern web development technologies and practices, delivering an efficient and user-friendly goals management solution.
 
-![Goals Dekstop](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/golasd.jpg)
-![Login Desktop](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/logind.png)
-![Goals Mobile](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/loginm.png)
-![Login Mobile](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/loginm.png)
-![Create](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/creategoal.png)
-![Goal achieved](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/goalachieved.png)
-![Goal achieved](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/goalswithachieved.png)
-![Statistics](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/statistics.png)
-![Settings](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/accountsettings.png)
+![Goals Dekstop](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/golasd2.jpg)
+![Login Desktop](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/logind2.png)
+![Goals Mobile](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/loginm2.png)
+![Login Mobile](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/loginm2.png)
+![Create](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/creategoal2.png)
+![Goal achieved](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/goalachieved2.png)
+![Goal achieved](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/goalswithachieved2.png)
+![Statistics](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/statistics2.png)
+![Settings](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/accountsettings2.png)
 
 ## Built with
 
@@ -52,7 +52,6 @@ React router,
 Math JS.
 
 * **Backend End**
-Technologies,
 NodeJS,
 Express,
 JWT,
