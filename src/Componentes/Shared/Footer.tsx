@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footerBg}>
       <small className={styles.footerText}>
-        Desarrollado y diseñado por Helen Mariño 2023
+      Designed and developed by Helen Mariño 2023
       </small>
     </footer>
   );
