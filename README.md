@@ -27,10 +27,7 @@ Users have the option to change their passwords and delete their accounts, all m
 
 This project showcases a practical implementation of modern web development technologies and practices, delivering an efficient and user-friendly goals management solution.
 
-![Goals Dekstop](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/golasd2.jpg)
 ![Login Desktop](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/logind2.png)
-![Goals Mobile](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/loginm2.png)
-![Login Mobile](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/loginm2.png)
 ![Create](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/creategoal2.png)
 ![Goal achieved](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/goalachieved2.png)
 ![Goal achieved](https://github.com/helenmdev/Goals-Manager/blob/main/src/Images/Demo/goalswithachieved2.png)
