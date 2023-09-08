@@ -73,12 +73,6 @@ Then Download or clone this project, enter in the project's directory from the t
 ### `npm i` (in case of having issues try npm install --force)
 ### `npm start`
 
-When the following warning appears, press Y and Enter
-
-" Something is already running on port 3000.
-
-Would you like to run the app on another port instead? » (Y/n)"
-
 Now you will be able to run the app from [http://localhost:3001](http://localhost:3001), the database is already hosted in Render therefore all functionalities are available.
 
 ## Author:
