@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./Credentials.module.css";
 import Cookies from "js-cookie";
 import { encryptData, decryptData } from "../../Services/Memory/RememberCrypt";
@@ -80,7 +80,6 @@ const Credentials = ({
       const isValidEmail = emailRegex.test(value);
       setUserValidation(isValidEmail ? "" : "Username must be a valid email");
     } else if (prop === "password") {
-
       const isValidPassword = value.length > 5;
       setPassValidation(
         isValidPassword ? "" : "Password must have more than 5 characters"
@@ -115,15 +114,17 @@ const Credentials = ({
   };
 
   return (
+    
     <div className={styles.mainbox}>
-      <div className={styles.card}>
+   
+      <div className={signup ? styles.cardsignup : styles.card}>
         <h1 className={styles.h1}>{title}</h1>
         <form className={styles.formcardAuth}>
           <label className={styles.labelAuth}>
             User
             <input
               className={styles.inputAuth}
-              placeholder="Write your user"
+              placeholder="Write your Email"
               value={form.username}
               onChange={(e) => onChange(e, "username")}
             />
@@ -171,6 +172,7 @@ const Credentials = ({
           </div>
         )}
       </div>
+
       {!signup && (
         <div className={styles.remember}>
           <input

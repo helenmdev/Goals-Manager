@@ -6,12 +6,19 @@ import axios from "axios";
 interface Token {
   token: string;
 }
-
 export async function signup(credentials: CredentialsTypes) {
   try {
     const response = await API.post("/signup", credentials);
 
-    if (response.status !== 200) throw new Error();
+    if (response.status !== 200) {
+      const errorData = response.data;
+      if (errorData && !errorData.success) {
+        const errorMessages = errorData.messages;
+        console.error(errorMessages); 
+      }
+      throw new Error('Network response was not ok');
+    }
+
     const token: Token = response.data;
     Cookies.set("token", JSON.stringify(token), {
       secure: true,
@@ -19,7 +26,8 @@ export async function signup(credentials: CredentialsTypes) {
 
     return token;
   } catch (error) {
-    throw error;
+    console.error('An error occurred:', error.response.data.messages);
+    throw error.response.data.messages;
   }
 }
 
