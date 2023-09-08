@@ -2,7 +2,6 @@ import { CredentialsTypes } from "../Types/CredentialsTypes";
 import Cookies from "js-cookie";
 import API from "./api";
 import axios from "axios";
-import { userId } from "./Memory/userData";
 
 interface Token {
   token: string;

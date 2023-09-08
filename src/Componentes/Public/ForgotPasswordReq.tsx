@@ -1,5 +1,4 @@
 import React, { useState, FormEvent } from "react";
-import axios from "axios";
 import styles from "../Shared/Credentials.module.css";
 import { useNavigate } from "react-router-dom";
 import { setUpNotifications } from "reapop";

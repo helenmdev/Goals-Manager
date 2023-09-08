@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import styles from "../Shared/Credentials.module.css";
 import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
 import { setUpNotifications } from "reapop";

@@ -28,6 +28,7 @@ const GoalTypeGraphic = () => {
         ) {
           return elements.push(state.objects[id].icon);
         }
+        return elements;
       });
     }
 
